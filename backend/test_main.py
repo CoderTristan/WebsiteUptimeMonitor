@@ -6,7 +6,7 @@ from sqlalchemy.pool import StaticPool
 
 from main import app
 from database import Base, get_db
-import models  # <--- THIS IS THE CRITICAL ADDITION!
+import models
 
 SQLALCHEMY_DATABASE_URL = "sqlite:///:memory:"
 
@@ -30,7 +30,6 @@ client = TestClient(app)
 
 @pytest.fixture(autouse=True)
 def setup_database():
-    # Because 'models' is imported above, Base now knows about your User table
     Base.metadata.create_all(bind=engine)
     yield
     Base.metadata.drop_all(bind=engine)
