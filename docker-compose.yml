@@ -18,8 +18,8 @@ services:
     container_name: uptime-backend
     ports:
       - "8000:8000"
-    environment:
-      DATABASE_URL: postgresql://admin:secret@postgres:5432/uptimedb
+    env_file:
+      - ./backend/.env
     depends_on:
       - postgres
 
